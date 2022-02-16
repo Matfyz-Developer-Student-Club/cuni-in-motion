@@ -1,8 +1,10 @@
 name: Angular GitHub CI
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
 
 jobs:
   ci:
@@ -27,7 +29,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           # caching node_modules
-          path: frontend/cuni_in_motion/
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
