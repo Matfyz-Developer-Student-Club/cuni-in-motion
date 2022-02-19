@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.test
+    container_name: frontend
+    env_file:
+      - frontend/.env
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+    container_name: backend
+    command: python manage.py runserver 0.0.0.0:5500 # Django default redirection
+    ports:
+      - "${DOCKER_WEB_PORT:-127.0.0.1:5500}:5500"
+    env_file:
+      - backend/.env
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+    - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgress
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=postgress_test
+
+volumes:
+  postgres_data:
