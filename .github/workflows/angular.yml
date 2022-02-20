@@ -43,11 +43,14 @@ jobs:
         run: |
           npm ci
       - name: Build
+        working-directory: ./frontend/cuni_in_motion
         run: |
           npm run build -- --prod
       - name: Lint
+        working-directory: ./frontend/cuni_in_motion
         run: |
           npm run lint
       - name: Test
+        working-directory: ./frontend/cuni_in_motion
         run: |
           npm run test -- --prod
