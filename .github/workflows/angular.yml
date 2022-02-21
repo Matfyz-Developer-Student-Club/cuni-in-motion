@@ -53,4 +53,4 @@ jobs:
       - name: Test
         working-directory: ./frontend/cuni_in_motion
         run: |
-          npm run test -- --prod
+          npm run test --
